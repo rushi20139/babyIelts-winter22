@@ -20,7 +20,7 @@ correctAnswer : number=0;
 incorrectAnswer: number=0;
 public mainCounter : number=2; //Primary Counter Minutes
 public quesCounter : number=0; //Secondary Counter minutes
-public quesSec : number=0; / Secondary Counter seconds
+public quesSec : number=0; // Secondary Counter seconds
 questionInterval$! :any;
 answerInterval$! :any; //questionInterval$ counter-part for quesCounter
 public seconds ! : number; //Primary Counter seconds
