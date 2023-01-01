@@ -50,7 +50,7 @@ options.forEach( (element: { isselected : boolean; }) => {
 element. isSelected=false;
 });
 this.iscorrectAnswer=true;
-option. isSelected=true;
+option.isSelected=true;
 }
 nextQuestion (){
 this.currentQuestion++;
@@ -67,14 +67,14 @@ if((this.questionList[i].options [j].isSelected==true) &&
 (this.questionList[i].options [j].correct==true)) {
 this.correctAnswer++;
 this.correctAns.push(i+1);
-this.shared.setCorrectAnsArray (this.correctAns);
+this.shared.setCorrectAnsArray(this.correctAns);
 //console. log("getter"+this.shared.getCorrectAnsArray ());
 }
 else if (this.questionList[i].options [j].isSelected==true) {
 this.incorrectAnswer++;
 this.incorrectAns.push(i+1);
 // console. log (this.incorrectAns);
-this.shared.setIncorrectAnsArray (this.incorrectAns);
+this.shared.setIncorrectAnsArray(this.incorrectAns);
 }
 
 }
