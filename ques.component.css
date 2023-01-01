@@ -1,0 +1,90 @@
+
+body{
+font-family: 'Times New Roman', Times, serif;
+margin: 0;
+}
+#myP{
+/* background-color: #ffff;*/
+align-items: flex- start;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-size: 250 px;
+height: 70 px
+width: 200 px;
+}
+#countdown{
+color:black;
+width:1200px;
+}
+.optionHover: hover{
+cursor: pointer
+background -color: rgb(219, 219, 219);
+}
+.option.active{
+cursor: pointer;
+border: 3px solid green;
+color:green;
+}
+.boxy{
+width: 800px;
+border:2px solid grey;
+padding: 10px;
+margin: 5px 80px 10px;
+}
+.circle{
+margin-right: 30px;
+border-radius: 50%;
+width: 34px;
+
+height: 34px
+padding: 10px;
+background: rgb(95, 95, 95) ;
+color: white;
+text-align:center;
+font: 32px Arial, sans-serif;
+}
+.circle.active{
+background-color: green;
+}
+card {
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+transition: 0.4s;
+}
+.card2 {
+box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+.btn:hover{
+background -color: gray;
+color:white;
+}
+#heading{
+margin:10px 0px 10px 20px;
+font-size: large;
+font-family: Arial, Helvetica, sans-serif;
+font-style: italic;
+}
+.option_group{
+list-style-type: none;
+margin: 30px 0;
+}
+.option{
+display: block;
+width: 900px;
+background- color: #ffff;
+margin-bottom: 10px;
+padding: 15px 20px;
+
+border: 1px solid grey;
+word-wrap: break -word;
+}
+.option:hover{
+background-color : rgb(220, 220, 220);
+}
+.border-green{
+border- color: green;
+border -width: 3px;
+}
+.font-weight-bold{
+font-weight: bold;
+}
