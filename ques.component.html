@@ -42,3 +42,29 @@ questionList[currentQuestion].options, option)"
 <div class="row col-md-11">
 {{option. text} }
 </div>
+</div>
+</li>
+</ol>
+<div class=" row">
+<button [disabled]="currentQuestion==0"type="button"
+(click)="previousQuestion () " style="margin-left: 300px; border-color : white; width: 120px; "
+class="btn rounded ">
+<<Previous
+</button>
+<button type="button" [disabled]="currentQuestion==question List.length-1" (click)
+="nextQuestion ()"
+style="margin-left: 20px; border- color: white;width: 120px" class="btn-next btn rounded">
+Next >>
+</button>
+<button type="button" (click) ="submitQuiz()" routerLink="/result"
+style="margin-left: 20px; border-color : white;width: 120px"
+class="btn-next btn rounded ">
+Submit
+</button>
+<div>
+Total Answer: {{totalAnswer}}//Correct Answer: {{correctAnswer} }//Incorrect Answer:
+{{incorrectAnswer}}
+//Time4Ques ({{currentQuestion+1} }):{{quesCounter}}:{{quesSec}}
+</div>
+</div>
+<router-outlet></router-outlet>
