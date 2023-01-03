@@ -1,0 +1,24 @@
+
+import{ NgModule} from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ExamComponent} from './exam/exam.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent} from './login/login.component';
+import { QuesComponent } from './ques/ques.component';
+import { Result1Component} from './result1/result1.component';
+export const routes : Routes =
+[
+{path: '', redirectTo: 'home', pathMatch: "full" },
+{path : 'login', component: LoginComponent},
+{path: 'home', component: HomeComponent},
+{path: 'ques', component: QuesComponent},
+{path : 'result', component:Result1Component},
+{path '**', redirectTo: "/home", pathMatch:"full"}
+{path: 'exam', component: ExamComponent},
+];
+//Add routing path here
+@NgModule({
+imports: [RouterModule.forRoot(routes)],
+exports: [RouterModule]
+})
+export class AppRoutingModule { }
