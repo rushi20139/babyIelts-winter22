@@ -1,7 +1,7 @@
 
 import { Component, Onlnit } from '@angular/core';
 import { SharedServiceService } from 'src/shared/shared-service.service';
-<!--- This is the code for Displaying Result Table --->
+/*This is the code for Displaying Result Table */
 <!-- This is the code for Displaying Result Table -->
 export interface PeriodicElement {
 name: string;
