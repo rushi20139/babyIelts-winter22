@@ -1,0 +1,127 @@
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from './user';
+import { UsersService } from './users.service';
+import { SharedServiceService } from 'src/app/shared/shared-service.service';
+
+@Component({
+
+selector: 'app-home',
+templateUrl: './home.component.html', 
+styleUrls: ['./home.component.css']
+
+})
+
+export class HomeComponent implements OnInit { 
+  users!: User[]; 
+  errorMessage!: any;
+  userSignInForm!: FormGroup;
+  successMessage!: any;
+  isPasswordSame!: boolean; 
+  userLoginForm!:FormGroup;
+
+  user: User = new User(); 
+  userLogin: User = new User(); 
+  tryToLogin!: boolean; 
+  errorMessageLogin!: string; 
+  successMessageLogin!: string; 
+  userName!:String;
+
+  constructor(private userService: UsersService, 
+  private shared :SharedServiceService,
+  private formBuilder: FormBuilder, 
+  private router: Router){} 
+
+  ngOnInit(): void {
+  this.getUsers();
+// console.log(this.getUsers()); 
+  this.userSignInForm = this.formBuilder.group
+(
+ { 
+   userName:["",[Validators.required, Validators.pattern("^[A-Za-z]{2,} ([A-Za-z]*){0,2}$")]],
+   email:["",[Validators.required, Validators.email]], 
+   mobileNumber:["",[Validators.required, Validators.pattern("^[0-9]{10}$")]],
+   password:["",[Validators.required, Validators.pattern
+   ("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{3,}$")]],
+   password1:["",[Validators.required]]
+  },
+ {
+   validator :this.checkPassword('password', 'password1')
+ }
+);
+
+this.userLogInForm=this.formBuilder.group(
+  {
+    emailId:["",[Validators.required]], 
+    password2:["",[Validators.required]]
+  }
+ )
+}
+
+private getUsers(){
+  this.userService.getUsersList().subscribe(data=>{ 
+   this.users=data;
+ });
+}
+
+saveUser(){ 
+ this.userService.createtUser(this.user).subscribe( (success)=>{ 
+ this.successMessage=success.id;
+ },
+
+ (error)=>{
+   if(error.status===400){ 
+     this.errorMessage="User Exists";
+   }
+  this.errorMessage="Please Run the Backend or the USER with emailId already Exists";
+ })
+}
+
+onLogin(){
+  this.tryToLogin = true;
+  this.errorMessageLogin = "";
+  this.successMessageLogin = "";
+  this.userLogin = this.userLogInForm.value as User;
+  this.userService.login(this.user).subscribe(
+      (response: any) => {
+       this.user = response 
+       sessionStorage.setItem("user", JSON.stringify(this.user)); 
+       //sessionStorage.setItem("userType", JSON.stringify("customer")); 
+       this.tryToLogin = false; 
+       this.shared.setUserName(this.user.name); 
+       this.router.navigate(['/ques']);
+      },
+    (error: string) => { 
+      console.log("hi"+error) 
+      this.tryToLogin = false; 
+      this.errorMessageLogin = <any>error;
+      }
+     )
+   }
+
+register() { 
+  console.log(this.user); 
+  this.saveUser();
+ }
+
+checkPassword(controlName: string, matchingControlName: string) { 
+   return (formGroup: FormGroup) => {
+     const control = formGroup.controls[controlName];
+     const matchingControl = formGroup.controls[matchingControlName]; 
+     if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
+        // return if another validator has already found an error on the matchingControl 
+     return;
+     }
+ // set error on matchingControl if validation fails
+
+if (control.value !== matchingControl.value) {
+ matchingControl.setErrors({ mustMatch: true });
+  this.isPasswordSame = (matchingControl.status == 'VALID') ? true : false;
+} else {
+   matchingControl.setErrors(null);
+   this.isPasswordSame = (matchingControl.status == 'VALID') ? true : false;
+   }
+  }
+ }
+}
